@@ -10,6 +10,7 @@ import Login from './Components/Login/Login';
 import Signup from './Components/Signup/Signup';
 import RequireAuth from './Components/RequireAuth';
 import Footer from './Components/Footer/Footer';
+import NotFound from './Components/NotFound/NotFound';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         </RequireAuth>} />
         <Route path="/login" element={<Login></Login>} />
         <Route path="/signup" element={<Signup></Signup>} />
+        <Route path='*' element={<NotFound></NotFound>}></Route>
       </Routes>
 
       <ToastContainer />

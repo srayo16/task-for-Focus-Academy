@@ -1,5 +1,5 @@
 import React from 'react';
-import { GrContactInfo } from 'react-icons/gr';
+import { IoMdContact } from 'react-icons/io';
 import { BsFacebook, BsYoutube, BsTwitter, BsLinkedin } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import './Footer.css';
@@ -11,7 +11,7 @@ const Footer = () => {
         <div className=' bg-dark'>
             <div className='container forFlex text-light p-5'>
                 <div className='respoAlingn'>
-                    <h3>Contact Fetch <GrContactInfo></GrContactInfo></h3>
+                    <h3>Contact Fetch <IoMdContact></IoMdContact></h3>
                 </div>
                 <div className='container ms-5 overflow-hidden'>
                     <div className='row g-3'>
@@ -45,9 +45,6 @@ const Footer = () => {
 
                             </ul>
                         </div>
-
-
-
                     </div>
 
                 </div>
