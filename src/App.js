@@ -9,11 +9,13 @@ import Home from './Components/Home/Home';
 import Login from './Components/Login/Login';
 import Signup from './Components/Signup/Signup';
 import RequireAuth from './Components/RequireAuth';
+import Footer from './Components/Footer/Footer';
 
 function App() {
   return (
     <>
       <Header></Header>
+
       <Routes>
         <Route path="/" element={<Welcomepage></Welcomepage>} />
         <Route path="/welcome" element={<Welcomepage></Welcomepage>} />
@@ -25,6 +27,7 @@ function App() {
       </Routes>
 
       <ToastContainer />
+      <Footer></Footer>
     </>
   );
 }

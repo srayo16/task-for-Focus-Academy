@@ -1,0 +1,21 @@
+/* handling card width  */
+.cardWidth {
+    width: 320px !important;
+    height: 480px !important;
+}
+
+/* for small device  */
+@media screen and (max-width: 440px) {
+    .cardWidth {
+        width: 320px !important;
+        height: 480px !important;
+    }
+}
+
+/* for tablet or medium device  */
+@media screen and (min-width: 441px) and (max-width: 840px) {
+    .cardWidth {
+        width: 320px !important;
+        height: 480px !important;
+    }
+}

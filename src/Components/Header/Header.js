@@ -9,11 +9,14 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from "react-router-dom";
 import auth from '../../Firebase.init';
 import Loading from '../Loading/Loading';
+import { GrContactInfo } from 'react-icons/gr';
+import { toast } from 'react-toastify';
 
 const Header = () => {
-    const [user, loading, error] = useAuthState(auth);
+    const [user, loading] = useAuthState(auth);
     const logout = () => {
         signOut(auth);
+        toast.success('Logged out');
     };
     if (loading) {
         return <Loading></Loading>
@@ -24,7 +27,7 @@ const Header = () => {
             {['lg'].map((expand) => (
                 <Navbar key={expand} bg="dark" variant='dark' expand={expand} className="mb-3">
                     <Container>
-                        <Navbar.Brand as={Link} to='/welcome'>Contact Fetch</Navbar.Brand>
+                        <Navbar.Brand as={Link} to='/welcome'>Contact Fetch <GrContactInfo></GrContactInfo></Navbar.Brand>
                         <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
                         <Navbar.Offcanvas
                             id={`offcanvasNavbar-expand-${expand}`}

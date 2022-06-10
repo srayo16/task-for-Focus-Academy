@@ -4,8 +4,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './Signup.css';
 import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { async } from '@firebase/util';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 import Loading from '../Loading/Loading';
 import auth from '../../Firebase.init';
 
@@ -38,7 +37,7 @@ const Signup = () => {
     }
 
     if (user || user1) {
-        toast('Logged in');
+        toast.success('Logged in');
         navigate(from, { replace: true });
     }
 
@@ -54,8 +53,8 @@ const Signup = () => {
             await createUserWithEmailAndPassword(email, password);
             await sendEmailVerification();
             await updateProfile({ displayName: name });
-            toast("Sign In Successful");
-            toast('Sent email');
+            toast.success("Sign In Successful");
+            toast.success('Sent email');
         }
 
         else {
@@ -65,7 +64,7 @@ const Signup = () => {
     }
 
     return (
-        <div className='container mt-3'>
+        <div className='container mt-3 mb-5' style={{ height: '700px' }}>
 
             <h1 className='text-center'>Please Sign Up</h1>
 

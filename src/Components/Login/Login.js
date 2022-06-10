@@ -2,8 +2,7 @@ import React, { useRef } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 import auth from '../../Firebase.init';
 import Loading from '../Loading/Loading';
 
@@ -33,7 +32,7 @@ const Login = () => {
         return <Loading></Loading>;
     }
     if (user || user1) {
-        toast('Logged in');
+        toast.success('Logged in');
         navigate(from, { replace: true });
     }
 
@@ -57,7 +56,7 @@ const Login = () => {
 
         if (email && !error2) {
             await sendPasswordResetEmail(email);
-            toast('Sent email');
+            toast.success('Sent email');
 
         }
         else {
@@ -67,7 +66,7 @@ const Login = () => {
 
     }
     return (
-        <div className='container mt-3'>
+        <div className='container mt-3' style={{ height: '700px' }}>
             <h1 className='text-center'>Please Log In</h1>
             <div className='handleSize mx-auto'>
                 <Form onSubmit={onsubLog}>
