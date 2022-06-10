@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -14,8 +14,8 @@ const Login = () => {
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
-
     const [sendPasswordResetEmail, sending, error2] = useSendPasswordResetEmail(auth);
+    const [signInWithGoogle, user1, loading1, error3] = useSignInWithGoogle(auth);
 
     const navigate = useNavigate();
     const mail = useRef('');
@@ -23,16 +23,16 @@ const Login = () => {
     let location = useLocation();
     let from = location.state?.from?.pathname || "/";
     let errormess;
-    if (error || error2) {
+    if (error || error2 || error3) {
 
         errormess = <p className='text-danger text-center fw-bolder'> Error:  {error?.message}
             {error2?.message} </p>
     }
 
-    if (loading || sending) {
+    if (loading || sending || loading1) {
         return <Loading></Loading>;
     }
-    if (user) {
+    if (user || user1) {
         toast('Logged in');
         navigate(from, { replace: true });
     }
@@ -91,7 +91,8 @@ const Login = () => {
                 <button onClick={() => resetPass()} className=' btn btn-link rounded-pill text-decoration-none  text-danger fw-bolder handleSubBtn2'><span className='text-dark'>Forgot password?</span> Reset Password</button>
                 <Link to='/signup' className=' btn btn-link rounded-pill text-decoration-none handleSubBtn2 text-danger fw-bolder'>Are you new user?</Link>
 
-                <ToastContainer />
+                <div>
+                    <Button variant="secondary" onClick={() => signInWithGoogle()} className='rounded-pill handleSubBtn'>Continue with google</Button></div>
 
 
             </div>

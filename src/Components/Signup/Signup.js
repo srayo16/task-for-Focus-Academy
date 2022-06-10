@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './Signup.css';
 import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { async } from '@firebase/util';
@@ -18,7 +18,9 @@ const Signup = () => {
         error,
     ] = useCreateUserWithEmailAndPassword(auth);
     const [sendEmailVerification, sending, error3] = useSendEmailVerification(auth);
-
+    const [signInWithGoogle, user1, loading1, error4] = useSignInWithGoogle(auth);
+    let location = useLocation();
+    let from = location.state?.from?.pathname || "/";
     const [updateProfile, updating, error2] = useUpdateProfile(auth);
     const [agree, setAgree] = useState(false);
     const nameInput = useRef('');
@@ -26,14 +28,18 @@ const Signup = () => {
     const passwordInput = useRef('');
     const confirmPasswordInput = useRef('');
     let errormess;
-    if (error || error2 || error3) {
+    if (error || error2 || error3 || error4) {
 
         errormess = <p className='text-danger text-center fw-bolder'> Error: {error ? error?.message : 'Something is wrong!'}</p>
-
-
     }
-    if (loading || updating || sending) {
+
+    if (loading || updating || sending || loading1) {
         return <Loading></Loading>;
+    }
+
+    if (user || user1) {
+        toast('Logged in');
+        navigate(from, { replace: true });
     }
 
     // sign up funtion 
@@ -96,10 +102,10 @@ const Signup = () => {
                         Sign Up
                     </Button>
                 </Form>
-
+                <div>
+                    <Button variant="secondary" onClick={() => signInWithGoogle()} className='rounded-pill handleSubBtn'>Continue with google</Button></div>
                 <Link to='/login' className=' btn btn-link rounded-pill text-decoration-none handleSubBtn2 text-danger fw-bolder'>Already have an account</Link>
-              
-                <ToastContainer />
+
 
             </div>
 
